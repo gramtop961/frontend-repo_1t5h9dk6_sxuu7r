@@ -1,3 +1,4 @@
+import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -5,34 +6,18 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white text-gray-900 dark:bg-black dark:text-white">
+    <div className="min-h-screen bg-[#0a0a0f] text-white antialiased selection:bg-fuchsia-500/20 selection:text-fuchsia-200">
+      {/* Global background auras */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute -top-32 left-1/2 h-[60vh] w-[90vw] -translate-x-1/2 rounded-full bg-fuchsia-500/10 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-[40vh] w-[60vw] rounded-full bg-indigo-500/10 blur-3xl" />
+        <div className="absolute top-1/4 -left-24 h-[30vh] w-[40vw] rounded-full bg-cyan-400/10 blur-3xl" />
+      </div>
+
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Features />
-        {/* Showcase section placeholder removed to keep components focused */}
-        <section id="showcase" className="relative py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Showcase</h2>
-              <p className="mt-3 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                A selection of refined layouts and components designed to impress.
-              </p>
-            </div>
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[1,2,3,4,5,6].map((i) => (
-                <div key={i} className="group relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white/50 dark:bg-white/[0.04] backdrop-blur">
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-indigo-500/10 via-fuchsia-500/10 to-amber-400/10" />
-                  <div className="relative aspect-[4/3]" />
-                  <div className="relative p-5">
-                    <div className="h-2 w-2 rounded-full bg-emerald-400 inline-block mr-2 align-middle" />
-                    <span className="align-middle text-sm text-gray-700 dark:text-gray-300">Smooth, luxury‑grade card</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </div>

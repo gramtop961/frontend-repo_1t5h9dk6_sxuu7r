@@ -1,70 +1,87 @@
+import React from 'react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Footer() {
   return (
-    <footer id="cta" className="relative pt-16 pb-10">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-        </div>
+    <footer id="contact" className="relative mt-24 border-t border-white/10 bg-black/40 py-16 backdrop-blur">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 -top-24 z-0 flex justify-center">
+        <div className="h-56 w-[70%] rounded-full bg-gradient-to-r from-fuchsia-500/20 via-violet-500/20 to-indigo-500/20 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] backdrop-blur p-8 sm:p-12 overflow-hidden">
-          <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-gradient-to-br from-indigo-500/20 via-fuchsia-500/20 to-amber-400/20 blur-3xl" />
-          <div className="relative grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <motion.h3
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white"
-              >
-                Ready for a site that feels truly high‑end?
-              </motion.h3>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.05, duration: 0.6 }}
-                className="mt-3 text-gray-600 dark:text-gray-300"
-              >
-                Let’s build something distinctive that turns visitors into believers.
-              </motion.p>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              className="flex flex-col sm:flex-row items-center gap-3 justify-end"
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 md:grid-cols-5">
+        {/* Brand & Copy */}
+        <div className="md:col-span-2">
+          <motion.h3
+            initial={{ y: 16, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-2xl font-semibold"
+          >
+            НУР Real Estate
+          </motion.h3>
+          <p className="mt-3 max-w-md text-white/70">
+            Луч света на рынке элитной недвижимости. Курируем сделки в ритме вашей жизни.
+          </p>
+          <div className="mt-6 space-y-2 text-white/70">
+            <div className="flex items-center gap-2"><Phone className="h-4 w-4" /> +971 555 123 456</div>
+            <div className="flex items-center gap-2"><Mail className="h-4 w-4" /> concierge@nur.agency</div>
+            <div className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Dubai · Los Angeles · Monaco</div>
+          </div>
+        </div>
+
+        {/* Contact form */}
+        <div className="md:col-span-3">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
+              }}
+              className="grid grid-cols-1 gap-4 sm:grid-cols-2"
             >
-              <a
-                href="#"
-                className="inline-flex items-center justify-center rounded-full bg-gray-900 text-white dark:bg-white dark:text-black px-6 py-3 text-sm font-semibold shadow-xl shadow-gray-900/10 hover:shadow-gray-900/20 transition-all"
-              >
-                Book a consultation
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-full border border-black/10 dark:border-white/10 px-6 py-3 text-sm font-semibold text-gray-900 dark:text-white hover:bg-white/70 dark:hover:bg-white/10 transition"
-              >
-                Contact us
-              </a>
-            </motion.div>
+              <div className="sm:col-span-1">
+                <label className="mb-1 block text-xs text-white/70">Имя</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Ваше имя"
+                  className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/40 focus:border-fuchsia-400/40"
+                />
+              </div>
+              <div className="sm:col-span-1">
+                <label className="mb-1 block text-xs text-white/70">Телефон</label>
+                <input
+                  required
+                  type="tel"
+                  placeholder="+971 ..."
+                  className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/40 focus:border-fuchsia-400/40"
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <label className="mb-1 block text-xs text-white/70">Запрос</label>
+                <textarea
+                  rows={4}
+                  placeholder="Опишите желаемый объект, бюджет и сроки"
+                  className="w-full resize-none rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/40 focus:border-fuchsia-400/40"
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <button
+                  type="submit"
+                  className="w-full rounded-xl bg-gradient-to-r from-fuchsia-600 via-violet-600 to-indigo-600 px-6 py-3 text-sm font-semibold shadow-lg shadow-fuchsia-600/20 transition hover:brightness-110"
+                >
+                  Отправить заявку
+                </button>
+              </div>
+            </form>
           </div>
-        </div>
-
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-600 dark:text-gray-400">
-          <p>© {new Date().getFullYear()} LuxeVibe. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-gray-900 dark:hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-gray-900 dark:hover:text-white">Terms</a>
-            <a href="#" className="hover:text-gray-900 dark:hover:text-white">Contact</a>
-          </div>
+          <p className="mt-4 text-xs text-white/50">Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности.</p>
         </div>
       </div>
+
+      <div className="mt-10 text-center text-xs text-white/50">© {new Date().getFullYear()} НУР Agency. Все права защищены.</div>
     </footer>
   );
 }

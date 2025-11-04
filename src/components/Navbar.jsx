@@ -1,72 +1,108 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Rocket, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { Home, Phone, Star } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const navItems = [
+  { label: 'Главная', href: '#home', icon: Home },
+  { label: 'Объекты', href: '#properties', icon: Star },
+  { label: 'Контакты', href: '#contact', icon: Phone },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/40 bg-white/60 dark:bg-black/40 border-b border-black/5 dark:border-white/10">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-2">
-            <div className="relative">
-              <motion.span
-                initial={{ scale: 0.8, rotate: -10, opacity: 0 }}
-                animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-fuchsia-500 to-amber-400 shadow-lg shadow-indigo-500/20"
-              >
-                <Rocket className="h-5 w-5 text-white" />
-              </motion.span>
-              <span className="absolute inset-0 -z-10 blur-xl bg-indigo-500/20 rounded-xl" />
-            </div>
-            <span className="font-semibold tracking-tight text-gray-900 dark:text-white text-lg">
-              LuxeVibe
-            </span>
-          </a>
-
-          <div className="hidden md:flex items-center gap-6">
-            <a href="#features" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Features</a>
-            <a href="#showcase" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Showcase</a>
-            <a href="#contact" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Contact</a>
-            <a
-              href="#cta"
-              className="inline-flex items-center gap-2 rounded-full bg-gray-900 text-white dark:bg-white dark:text-black px-5 py-2 text-sm font-semibold shadow-lg shadow-gray-900/10 hover:shadow-gray-900/20 transition-all"
-            >
-              Get Started <Star className="h-4 w-4" />
+    <div className="fixed inset-x-0 top-0 z-50">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 backdrop-blur supports-[backdrop-filter]:bg-black/30">
+          <div className="flex items-center justify-between px-4 py-3 md:px-6">
+            {/* Brand */}
+            <a href="#home" className="group relative inline-flex items-center gap-3">
+              <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-fuchsia-500 to-indigo-500 shadow-lg shadow-fuchsia-500/20">
+                <motion.div
+                  initial={{ rotate: -10, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                  className="text-xl font-black tracking-tight"
+                >
+                  N
+                </motion.div>
+                <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_35%)]" />
+              </div>
+              <div>
+                <div className="text-sm font-medium text-white/60">НУР AGENCY</div>
+                <div className="-mt-0.5 text-lg font-semibold tracking-wide">Луч элитной недвижимости</div>
+              </div>
             </a>
+
+            {/* Desktop nav */}
+            <nav className="hidden items-center gap-2 md:flex">
+              {navItems.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-white/80 transition hover:text-white"
+                >
+                  <Icon className="h-4 w-4 text-white/50 transition group-hover:text-white" />
+                  <span>{label}</span>
+                  <span className="ml-2 h-px w-6 origin-left scale-x-0 bg-gradient-to-r from-white/0 via-white/60 to-white/0 transition group-hover:scale-x-100" />
+                </a>
+              ))}
+              <a
+                href="#contact"
+                className="ml-2 inline-flex items-center rounded-xl bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2 text-sm font-semibold shadow-lg shadow-fuchsia-600/20 transition hover:brightness-110"
+              >
+                Консультация
+              </a>
+            </nav>
+
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Toggle menu"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 md:hidden"
+            >
+              <span className="block h-0.5 w-5 translate-y-[-4px] rounded bg-white" />
+              <span className="block h-0.5 w-4 rounded bg-white" />
+              <span className="block h-0.5 w-5 translate-y-[4px] rounded bg-white" />
+            </button>
           </div>
 
-          <button
-            className="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-900/5 dark:hover:bg-white/5"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6">
-              {open ? (
-                <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              )}
-            </svg>
-          </button>
+          {/* Mobile menu */}
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden md:hidden"
+              >
+                <div className="space-y-2 px-4 pb-4 pt-2">
+                  {navItems.map(({ label, href, icon: Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white/80"
+                    >
+                      <Icon className="h-5 w-5 text-white/60" />
+                      <span>{label}</span>
+                    </a>
+                  ))}
+                  <a
+                    href="#contact"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-center rounded-xl bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-3 font-semibold shadow-lg shadow-fuchsia-600/20"
+                  >
+                    Консультация
+                  </a>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            className="md:hidden overflow-hidden"
-          >
-            <div className="flex flex-col gap-2 py-3">
-              <a href="#features" className="px-2 py-2 rounded-md hover:bg-gray-900/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300">Features</a>
-              <a href="#showcase" className="px-2 py-2 rounded-md hover:bg-gray-900/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300">Showcase</a>
-              <a href="#contact" className="px-2 py-2 rounded-md hover:bg-gray-900/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300">Contact</a>
-              <a href="#cta" className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-gray-900 text-white dark:bg-white dark:text-black px-5 py-2 text-sm font-semibold shadow-lg shadow-gray-900/10">Get Started</a>
-            </div>
-          </motion.div>
-        )}
-      </nav>
-    </header>
+      </div>
+    </div>
   );
 }
